@@ -1,20 +1,21 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 "-----------------------------------------------------------------
 " base
 "-----------------------------------------------------------------
-" plugin manager
-Plugin 'VundleVim/Vundle.vim'
-
 " ステータスラインの表示内容強化
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " 末尾の全角と半角の空白文字を赤くハイライト
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 
-call vundle#end()
+" カラー
+Plug 'joshdick/onedark.vim'
 
-filetype plugin indent on
+" インデントラインの可視化
+Plug 'Yggdroot/indentLine'
+
+" ファイルエクスプローラー
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+call plug#end()
+
