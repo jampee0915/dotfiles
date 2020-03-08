@@ -10,6 +10,7 @@ Plug 'bronson/vim-trailing-whitespace'
 
 " カラー
 Plug 'joshdick/onedark.vim'
+Plug 'jacoborus/tender.vim'
 
 " インデントラインの可視化
 Plug 'Yggdroot/indentLine'

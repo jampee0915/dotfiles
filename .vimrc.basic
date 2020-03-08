@@ -123,6 +123,9 @@ if has('mouse')
 endif
 
 " カラーをonedarkに
-colorscheme onedark
+" colorscheme onedark
+
+" カラーをtenderに
+colorscheme tender
 
 
