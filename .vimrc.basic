@@ -107,6 +107,9 @@ set showmatch
 " 保存するコマンド履歴の数
 set history=5000
 
+" クリップボードにコピーを有効にする
+set clipboard=unnamed,autoselect
+
 " マウス有効化
 if has('mouse')
     set mouse=a
