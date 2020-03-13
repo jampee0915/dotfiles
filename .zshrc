@@ -1,9 +1,9 @@
-ZSHOME="${HOME}/.zsh.d"
-if [ -d $ZSHHOME -a -r $ZSHHOME -a \
-        ¦-x $ZSHHOME ]; then
-    for i in $ZSHHOME/*; do
-        [[ ${i##*/} = *.zsh ]] &&
-            [ \( -f $i -o -h $i \) -a -r $i ] && . $i
-    done
-fi
+export ZSH="/Users/jampee/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+source ~/dotfiles/.zsh.d/history.zsh
+source ~/dotfiles/.zsh.d/alias.zsh
+source ~/dotfiles/.zsh.d/pass.zsh
 
