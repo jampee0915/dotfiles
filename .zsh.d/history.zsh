@@ -25,6 +25,9 @@ setopt hist_reduce_blanks
 # 補完候補が複数あるときに自動的に一覧表示する
 setopt auto_menu
 
+# ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
+setopt hist_ignore_all_dups
+
 # pecoでhistory検索
 function peco-select-history() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
