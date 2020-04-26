@@ -16,3 +16,6 @@ fi
 
 # nodenv
 eval "$(nodenv init -)"
+
+# git
+export PATH=/usr/local/Cellar/git/2.26.1_1/bin:$PATH
