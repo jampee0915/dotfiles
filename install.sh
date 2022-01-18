@@ -23,5 +23,8 @@ if if [ ! -d ${DOT_DIR} ]; then
         echo "curl or wget or git required"
         exit 1
     fi
+
+    cd ${DOT_DIR}
+    make init
 fi
 
