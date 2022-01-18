@@ -1,2 +1,6 @@
 alias gs='git status'
+alias gco='git checkout'
 alias gd='git diff'
+alias ll='ls -la'
+alias ll='ls -lGF'
+alias ls='ls -GF'

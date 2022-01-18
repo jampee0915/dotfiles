@@ -1,4 +1,4 @@
-# ghqのレポジトリ検索
+# ghqのレポジトリ検索(Ctrl+g)
 function peco-src () {
   local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
@@ -9,3 +9,4 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^g' peco-src
+

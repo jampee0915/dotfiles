@@ -1,10 +1,45 @@
-export ZSH="/Users/jampee/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-source ~/dotfiles/.zsh.d/history.zsh
-source ~/dotfiles/.zsh.d/alias.zsh
-source ~/dotfiles/.zsh.d/pass.zsh
-source ~/dotfiles/.zsh.d/peco.zsh
+autoload -U promptinit; promptinit
+
+setopt auto_cd
+zplug "mafredri/zsh-async"
+zplug 'romkatv/powerlevel10k', as:theme, depth:1
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-syntax-highlighting'
+zplug "chrissicool/zsh-256color"
+zplug 'b4b4r07/enhancd', use:init.sh
+zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:rg
+# zplug 'mrowa44/emojify', as:command
+
+# enhancd
+: "Display a list of files in the cd destination dir." && {
+  [ -z "$ENHANCD_ROOT" ] || export ENHANCD_HOOK_AFTER_CD="tree -L 1" # enhancd hook use
+}
+
+# If there are plug-ins not yet installed, install them.
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug instal
+    fi
+fi
+
+# plugin load
+zplug load
+
+# If .p10k.zsh exsits, load setting
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+
+# Road zsh settings
+ZSHHOME="${HOME}/dotfiles/.zsh.d"
+if [ -d $ZSHHOME -a -r $ZSHHOME -a \
+     -x $ZSHHOME ]; then
+    for i in $ZSHHOME/*; do
+        [[ ${i##*/} = *.zsh ]] &&
+            [ \( -f $i -o -h $i \) -a -r $i ] && . $i
+    done
+fi
 
