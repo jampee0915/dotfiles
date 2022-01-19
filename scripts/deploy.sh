@@ -19,3 +19,16 @@ done
 
 mkdir -p $HOME/.config/karabiner
 ln -sfnv $DOTFILES_DIR/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
+
+if has "anyenv"; then
+    anyenv init
+    anyenv install nodenv
+    anyenv install pyenv
+    anyenv install tfenv
+
+    exec $SHELL -l
+
+    nodenv install 17.3.1
+    nodenv global 17.3.1
+fi
+
