@@ -1,8 +1,5 @@
 #!/bin/bash
 
-DOTFILES_DIR="$HOME/dotfiles"
-
-# Create symbolick link
 for file in .??*
 do
     [[ "$file" == ".git" ]] && continue
@@ -10,5 +7,6 @@ do
     [[ "$file" == ".DS_Store" ]] && continue
     [[ "$file" == ".zsh.d" ]] && continue
 
-    ln -sfnv $DOTFILES_DIR/$file $HOME/$file
+    rm -vrf $HOME/$file
 done
+

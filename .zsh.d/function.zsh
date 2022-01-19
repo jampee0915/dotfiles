@@ -8,10 +8,27 @@ fbr() {
 
 # open pull request page(pr)
 pr () {
-    local branch url
     branch=$(git rev-parse --abbrev-ref HEAD)
     url=$(git config --local remote.origin.url)
-    open "$url/pull/$branch"
+    if [[ $url =~ ^https.*$ ]]; then
+        open "$url/pull/$branch"
+    else
+        domain=$(echo $url | awk -F'[@]' '{print $2}' | awk -F'[:]' '{print $1}')
+        repository_path=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$repository_path/pull/$branch"
+    fi
+}
+
+# open github repository
+repo () {
+    url=$(git config --local remote.origin.url)
+    if [[ $url =~ ^https.*$ ]]; then
+        open $url
+    else
+        domain=$(echo $url | awk -F'[@]' '{print $2}' | awk -F'[:]' '{print $1}')
+        repository_path=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$repository_path"
+    fi
 }
 
 # full text search
