@@ -14,3 +14,4 @@ do
     rm -vrf $HOME/$file
 done
 
+rm -vrf $HOME/.config/karabiner/karabiner.json

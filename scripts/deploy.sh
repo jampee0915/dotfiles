@@ -16,3 +16,6 @@ do
 
     ln -sfnv $DOTFILES_DIR/$file $HOME/$file
 done
+
+mkdir -p $HOME/.config/karabiner
+ln -sfnv $DOTFILES_DIR/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json

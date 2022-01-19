@@ -37,6 +37,7 @@ cask "google-japanese-ime"
 cask "alfred"
 cask "bettertouchtool"
 cask "kindle"
+cask "karabiner-elements"
 
 # -----------------
 #               dev
