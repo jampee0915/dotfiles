@@ -12,7 +12,7 @@ tap "homebrew/core"
 # ========================
 brew "mas"
 
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 brew "ghq"
 brew "jq"
 brew "peco"

@@ -2,6 +2,8 @@ let mapleader = "\<space>"
 
 " leader+wでファイル保存
 noremap <leader>w :w<cr>
+" leader+nで NERDTreeを開く
+noremap <leader>n :NERDTree<cr>
 
 "-----------------------------------------------------------------
 " encoding
@@ -109,10 +111,14 @@ set wildmenu
 set history=5000
 
 " クリップボードにコピーを有効にする
-set clipboard=unnamed,autoselect
+if has('nvim')
+    set clipboard=unnamed
+else
+    set clipboard=unnamed,autoselect
+endif
 
 " マウス有効化
-if has('mouse')
+if !has('nvim') && has('mouse')
     set mouse=a
     if has('mouse_sgr')
         set ttymouse=sgr
@@ -148,8 +154,47 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
+"-----------------------------------------------------------------
+" coc.nvim
+"-----------------------------------------------------------------
+let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint8', 'coc-prettier', 'coc-git', 'coc-fzf-preview', 'coc-lists']
+
+function! s:coc_typescript_settings() abort
+  nnoremap <silent> <buffer> [dev]f :<C-u>CocCommand eslint.executeAutofix<CR>:CocCommand prettier.formatFile<CR>
+endfunction
+
+augroup coc_ts
+  autocmd!
+  autocmd FileType typescript,typescriptreact call <SID>coc_typescript_settings()
+augroup END
+
+"-----------------------------------------------------------------
+" ctreesitter
+"-----------------------------------------------------------------
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "typescript",
+    "tsx",
+  },
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+
+"-----------------------------------------------------------------
+" fzf-preview
+"-----------------------------------------------------------------
+let $BAT_THEME                     = 'gruvbox-dark'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox-dark'
+nnoremap <silent> <C-p>  :<C-u>CocCommand fzf-preview.FromResources buffer project_mru project<CR>
 
