@@ -2,6 +2,10 @@
 
 DOTFILES_DIR="$HOME/dotfiles"
 
+has() {
+    type "$1" > /dev/null 2>&1
+}
+
 # Create symbolick link
 for file in .??*
 do
@@ -17,10 +21,16 @@ do
     ln -sfnv $DOTFILES_DIR/$file $HOME/$file
 done
 
+# karabiner
 mkdir -p $HOME/.config/karabiner
 ln -sfnv $DOTFILES_DIR/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
 
-if has "anyenv"; then
+if has "zplug"; then
+    zplug install
+fi
+
+# anyenv
+if [ ! has "anyenv"] && [ ! has "nodenv" ]; then
     anyenv init
     anyenv install nodenv
     anyenv install pyenv
@@ -30,5 +40,12 @@ if has "anyenv"; then
 
     nodenv install 17.3.1
     nodenv global 17.3.1
+fi
+
+# change login shell
+if [ ! "$SHELL" = $(which zsh) ]; then
+    sudo sh -c "$(echo which zsh) >> /etc/shells"
+    chsh -s $(echo which zsh)
+    exec $SHELL -l
 fi
 
