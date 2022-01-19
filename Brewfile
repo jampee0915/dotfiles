@@ -19,6 +19,7 @@ brew "peco"
 brew "tmux"
 brew "zsh"
 brew "zplug"
+brew "exa"
 
 brew "git"
 brew "awscli"

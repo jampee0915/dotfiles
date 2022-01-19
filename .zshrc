@@ -31,7 +31,7 @@ fi
 zplug load
 
 # If .p10k.zsh exsits, load setting
-[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Road zsh settings
 ZSHHOME="${HOME}/dotfiles/.zsh.d"
