@@ -15,8 +15,8 @@ zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:rg
 # zplug 'mrowa44/emojify', as:command
 
 # enhancd
-: "Display a list of files in the cd destination dir." && {
-  [ -z "$ENHANCD_ROOT" ] || export ENHANCD_HOOK_AFTER_CD="tree -L 1" # enhancd hook use
+: "Display a list of files in destination dir." && {
+  [ -z "$ENHANCD_ROOT" ] || export ENHANCD_HOOK_AFTER_CD="ls -la"
 }
 
 # If there are plug-ins not yet installed, install them.
