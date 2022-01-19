@@ -2,8 +2,6 @@ let mapleader = "\<space>"
 
 " leader+wでファイル保存
 noremap <leader>w :w<cr>
-" leader+nで NERDTreeを開く
-noremap <leader>n :NERDTree<cr>
 
 "-----------------------------------------------------------------
 " encoding
@@ -148,7 +146,6 @@ highlight Normal ctermbg=none
 "-----------------------------------------------------------------
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
@@ -160,6 +157,11 @@ Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'sainnhe/gruvbox-material'
+
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/glyph-palette.vim'
 call plug#end()
 
 "-----------------------------------------------------------------
@@ -194,7 +196,24 @@ EOF
 "-----------------------------------------------------------------
 " fzf-preview
 "-----------------------------------------------------------------
-let $BAT_THEME                     = 'gruvbox-dark'
-let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox-dark'
+let $BAT_THEME                     = 'badwolf'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'badwolf'
 nnoremap <silent> <C-p>  :<C-u>CocCommand fzf-preview.FromResources buffer project_mru project<CR>
 
+"-----------------------------------------------------------------
+" fern
+"-----------------------------------------------------------------
+" leader+eで エクスプロラーを開く
+nnoremap <silent> <Leader>e :<C-u>Fern . -drawer<CR>
+" leader+Eで、現在のファイルの場所を開く
+nnoremap <silent> <Leader>E :<C-u>Fern . -drawer -reveal=%<CR>
+
+" ファイルのアイコンを表示
+let g:fern#renderer = 'nerdfont'
+
+" アイコンに色をつける
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
