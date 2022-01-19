@@ -2,12 +2,16 @@
 
 DOTFILES_DIR=$HOME/dotfiles
 
+has() {
+    type "$1" > /dev/null 2>&1
+}
+
 # Install homebrew
-if [! which brew >/dev/null 2>&1]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! has "brew"; then
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 fi
 
-if [! which brew >/dev/null 2>&1]; then
+if ! has "brew"; then
     echo "homebrew install unsccessfuly.... please check log."
     exit 1
 fi
@@ -15,7 +19,7 @@ fi
 # Install tools
 brew bundle --file $DOTFILES_DIR/Brewfile
 
-if which anyenv >/dev/null 2>&1; then
+if has "anyenv"; then
     anyenv init
     anyenv install nodenv
     anyenv install pyenv
