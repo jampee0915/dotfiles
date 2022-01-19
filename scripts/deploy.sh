@@ -4,6 +4,7 @@
 for file in .??*
 do
     [[ "$file" == ".git" ]] && continue
+    [[ "$file" == ".gitignore" ]] && continue
     [[ "$file" == ".DS_Store" ]] && continue
     [[ "$file" == ".zsh.d" ]] && continue
 
