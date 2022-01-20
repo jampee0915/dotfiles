@@ -14,7 +14,7 @@ do
     [[ "$file" == ".DS_Store" ]] && continue
     [[ "$file" == ".zsh.d" ]] && continue
     if [[ "$file" == ".vimrc" ]]; then
-        ln -sfnv $HOME/.vim $HOME/.config/nvim
+        ln -s $HOME/.vim $HOME/.config/nvim
         ln -sfnv $DOTFILES_DIR/$file $HOME/.config/nvim/init.vim
     fi
 
@@ -25,25 +25,27 @@ done
 mkdir -p $HOME/.config/karabiner
 ln -sfnv $DOTFILES_DIR/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
 
-if has "zplug"; then
-    zplug install
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug instal
+    fi
 fi
 
 # anyenv
-if [ ! has "anyenv"] && [ ! has "nodenv" ]; then
+if has "anyenv" -a ! has "nodenv"; then
     anyenv init
+    anyenv install --init
     anyenv install nodenv
     anyenv install pyenv
     anyenv install tfenv
-
-    exec $SHELL -l
 
     nodenv install 17.3.1
     nodenv global 17.3.1
 fi
 
 # change login shell
-if [ ! "$SHELL" = $(which zsh) ]; then
+if [ "$SHELL" != $(which zsh) ]; then
     sudo sh -c "$(echo which zsh) >> /etc/shells"
     chsh -s $(echo which zsh)
     exec $SHELL -l
