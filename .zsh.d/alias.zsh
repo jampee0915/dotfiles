@@ -2,6 +2,8 @@ alias gs='git status'
 alias gco='git checkout'
 alias gd='git diff'
 alias f='vim $(fzf)'
+alias vi='nvim'
+alias vim='nvim'
 
 if [[ $(command -v exa) ]]; then
     alias e='exa --icons --git'
