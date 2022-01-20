@@ -181,17 +181,19 @@ augroup END
 "-----------------------------------------------------------------
 " ctreesitter
 "-----------------------------------------------------------------
-lua <<EOF
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    "typescript",
-    "tsx",
-  },
-  highlight = {
-    enable = true,
-  },
-}
+if has('nvim')
+    lua <<EOF
+    require('nvim-treesitter.configs').setup {
+      ensure_installed = {
+        "typescript",
+        "tsx",
+      },
+      highlight = {
+        enable = true,
+      },
+    }
 EOF
+endif
 
 "-----------------------------------------------------------------
 " fzf-preview
