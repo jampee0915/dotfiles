@@ -1,4 +1,8 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
+if [ "$(uname -m)" = "arm64" ]; then
+    export ZPLUG_HOME=/opt/homebrew/bin/brew shellenv
+else
+    export ZPLUG_HOME=/usr/local/opt/zplug
+fi
 source $ZPLUG_HOME/init.zsh
 
 autoload -U promptinit; promptinit

@@ -20,6 +20,7 @@ brew "tmux"
 brew "zsh"
 brew "zplug"
 brew "exa"
+brew "fzf"
 
 brew "git"
 brew "awscli"
@@ -38,6 +39,7 @@ cask "alfred"
 cask "bettertouchtool"
 cask "kindle"
 cask "karabiner-elements"
+cask "1password"
 
 # -----------------
 #               dev

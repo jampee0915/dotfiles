@@ -36,6 +36,8 @@ fi
 if has "anyenv" -a ! has "nodenv"; then
     anyenv init
     anyenv install --init
+    mkdir -p $(anyenv root)/plugins
+    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
     anyenv install nodenv
     anyenv install pyenv
     anyenv install tfenv
@@ -45,9 +47,9 @@ if has "anyenv" -a ! has "nodenv"; then
 fi
 
 # change login shell
-if [ "$SHELL" != $(which zsh) ]; then
-    sudo sh -c "$(echo which zsh) >> /etc/shells"
-    chsh -s $(echo which zsh)
-    exec $SHELL -l
+if [ "$(uname -m)" = "arm64" ]; then
+    sudo sh -c "$(/opt/homebrew/bin/zsh) >> /etc/shells"
+else
+    sudo sh -c "$(/usr/local/bin/zsh) >> /etc/shells"
 fi
 
