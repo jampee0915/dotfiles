@@ -3,6 +3,10 @@ let mapleader = "\<space>"
 " leader+wでファイル保存
 noremap <leader>w :w<cr>
 
+" windowを分割する
+nmap ss :split<cr><C-w>w
+nmap sv :vsplit<cr><C-w>w
+
 "-----------------------------------------------------------------
 " encoding
 "-----------------------------------------------------------------
@@ -162,6 +166,7 @@ Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 "-----------------------------------------------------------------
@@ -219,3 +224,31 @@ augroup my-glyph-palette
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
+
+"-----------------------------------------------------------------
+" ale(frontend prettier) / $ yarn add -D prettier-eslint-cli
+"-----------------------------------------------------------------
+let g:ale_fixers = {
+\   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'javascript': ['prettier'],
+\   'javascriptreact': ['prettier'],
+\   'css': ['prettier'],
+\}
+
+" 修正箇所の表示オプション
+let g:ale_sign_error = 'P>'
+let g:ale_sign_warning = 'P-'
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
+
+nmap <silent> <C-w>j <Plug>(ale_next_wrap)
+nmap <silent> <C-w>k <Plug>(ale_previous_wrap)
+
+" ファイル保存時に実行
+let g:ale_fix_on_save = 1
+" ローカルの設定ファイルを考慮する
+let g:ale_javascript_prettier_use_local_config = 1
+
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+

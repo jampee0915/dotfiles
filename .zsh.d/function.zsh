@@ -53,3 +53,25 @@ function peco-src () {
 zle -N peco-src
 bindkey '^g' peco-src
 
+function ide() {
+    tmux split-window -v -p 30
+    tmux split-window -h -p 66
+    tmux split-window -h -p 50
+}
+
+function fde() {
+  local cid
+  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
+}
+
+function file-incremental-search() {
+  local selected_file=`find $HOME/* -type f | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"`
+  if [ -n "$selected_file" ];then
+      BUFFER="vim $selected_file"
+      zle accept-line
+  fi
+  zle clear-screen
+ }
+zle -N file-incremental-search
+bindkey '^z' file-incremental-search

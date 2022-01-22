@@ -21,6 +21,7 @@ brew "zsh"
 brew "zplug"
 brew "exa"
 brew "fzf"
+brew "bat"
 
 brew "git"
 brew "awscli"
