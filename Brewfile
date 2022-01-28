@@ -27,22 +27,22 @@ brew "git"
 brew "awscli"
 brew "anyenv"
 brew "go"
-brew "kotlin"
-brew "gradle"
+# brew "kotlin"
+# brew "gradle"
 
 
 # ========================
 #                     cask
 # ========================
-cask "google-chrome"
+# cask "google-chrome"
 cask "google-japanese-ime"
 cask "alfred"
 cask "bettertouchtool"
 cask "hyperswitch"
 cask "authy"
-cask "kindle"
+# cask "kindle"
 cask "karabiner-elements"
-cask "1password"
+# cask "1password"
 
 # -----------------
 #               dev
@@ -50,7 +50,7 @@ cask "1password"
 cask "visual-studio-code"
 cask "iterm2"
 cask "docker"
-cask "corretto"
+# cask "corretto"
 cask "intellij-idea"
 
 # -----------------
