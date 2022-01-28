@@ -12,10 +12,15 @@ pr () {
     url=$(git config --local remote.origin.url)
     if [[ $url =~ ^https.*$ ]]; then
         open "$url/pull/$branch"
+    elif [[ $url =~ ^ssh.*$ ]]; then
+        organization=$(echo $url | awk -F'[/]' '{print $4}')
+        domain=$(echo $url | awk -F'[/]' '{print $3}' | awk -F'[@]' '{print $2}')
+        repository=$(echo $url | awk -F'[/]' '{print $5}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$organization/$repository/pull/$branch"
     else
         domain=$(echo $url | awk -F'[@]' '{print $2}' | awk -F'[:]' '{print $1}')
-        repository_path=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
-        open "https://$domain/$repository_path/pull/$branch"
+        repository=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$repository/pull/$branch"
     fi
 }
 
@@ -24,21 +29,16 @@ repo () {
     url=$(git config --local remote.origin.url)
     if [[ $url =~ ^https.*$ ]]; then
         open $url
+    elif [[ $url =~ ^ssh.*$ ]]; then
+        organization=$(echo $url | awk -F'[/]' '{print $4}')
+        domain=$(echo $url | awk -F'[/]' '{print $3}' | awk -F'[@]' '{print $2}')
+        repository=$(echo $url | awk -F'[/]' '{print $5}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$organization/$repository"
     else
         domain=$(echo $url | awk -F'[@]' '{print $2}' | awk -F'[:]' '{print $1}')
-        repository_path=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
-        open "https://$domain/$repository_path"
+        repository=$(echo $url | awk -F'[:]' '{print $2}' | awk -F'[.]' '{print $1}')
+        open "https://$domain/$repository"
     fi
-}
-
-# full text search
-fzgrep() {
-  INITIAL_QUERY=""
-  RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-  FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-        --ansi --phony --query "$INITIAL_QUERY" \
-        --preview 'cat `echo {} | cut -f 1 --delim ":"`'
 }
 
 # repository search(Ctrl+g)
@@ -69,7 +69,14 @@ function fde() {
 
 # file incremental search(Ctrl+z)
 function file-incremental-search() {
-  local selected_file=`find $HOME/* -type f | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"`
+  #exclude_dirs=("Applications" "Library" "Creative Cloud Files")
+  #exclude_option_command=""
+  #for exclude_dir in ${exclude_dirs[@]}; do
+  #    exclude_option_command+=" -type d -name $exclude_dir -prune -o "
+  #done
+  local selected_file=`find $HOME/* -type d -name "Applications" -prune -o -type d -name "Library" -prune -o -type d -name "Creative Cloud Files" -prune -o -type f | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"`
+  # echo $exclude_option_command
+  # local selected_file=`find $HOME/* $exclude_option_command -type f | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"`
   if [ -n "$selected_file" ];then
       BUFFER="vim $selected_file"
       zle accept-line
@@ -78,3 +85,22 @@ function file-incremental-search() {
  }
 zle -N file-incremental-search
 bindkey '^z' file-incremental-search
+
+# aws profile change
+function awsp() {
+    profiles=$(aws configure list-profiles)
+    profile_array=($(echo $profiles))
+    selected_profile=$(echo $profiles | peco)
+
+    [[ -n ${profile_array[(re)${selected_profile}]} ]] && export AWS_PROFILE=${selected_profile}; echo "😎 Changed to ${selected_profile} AWS Profile! 🚀"
+}
+
+# full text search
+fzgrep() {
+  INITIAL_QUERY=""
+  RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+  FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+        --ansi --phony --query "$INITIAL_QUERY" \
+        --preview 'cat `echo {} | cut -f 1 --delim ":"`'
+}
