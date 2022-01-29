@@ -95,7 +95,6 @@ function peco-ssh () {
   }
   ' ~/.ssh/config | sort | peco --query "$LBUFFER")
   if [ -n "$selected_host" ]; then
-    echo -ne "\033]1337;SetProfile=$selected_host\a"
     BUFFER="ssh ${selected_host}"
     zle accept-line
   fi
