@@ -114,6 +114,13 @@ function dcl() {
   [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
 }
 
+# 対象のdocker containerをstopする
+function dcs() {
+  local cid
+  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && docker stop "$cid"
+}
+
 
 ###########################################################################
 #                                                               File search
