@@ -2,7 +2,7 @@
 #                                                                       Git
 ###########################################################################
 # ローカルにあるブランチを検索し、checkoutする
-br() {
+function br() {
   local branches branch
   branches=$(git --no-pager branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
@@ -10,7 +10,7 @@ br() {
 }
 
 # 対象ブランチのPRを開く
-pr () {
+function pr () {
     branch=$(git rev-parse --abbrev-ref HEAD)
     url=$(git config --local remote.origin.url)
     if [[ $url =~ ^https.*$ ]]; then
@@ -28,7 +28,7 @@ pr () {
 }
 
 # 対象のレポジトリのgithubをブラウザで開く
-repo () {
+function repo () {
     url=$(git config --local remote.origin.url)
     if [[ $url =~ ^https.*$ ]]; then
         open $url
@@ -109,7 +109,7 @@ bindkey '^u' peco-ssh
 #                                                                    Docker
 ###########################################################################
 # 対象のdocker containerにログインする
-function dc() {
+function dcl() {
   local cid
   cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
   [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
