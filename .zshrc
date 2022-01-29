@@ -16,7 +16,6 @@ zplug 'zsh-users/zsh-syntax-highlighting'
 zplug "chrissicool/zsh-256color"
 zplug 'b4b4r07/enhancd', use:init.sh
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:rg
-# zplug 'mrowa44/emojify', as:command
 
 # enhancd
 : "Display a list of files in destination dir." && {
