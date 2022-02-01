@@ -101,7 +101,7 @@ function peco-ssh () {
   zle clear-screen
 }
 zle -N peco-ssh
-bindkey '^u' peco-ssh
+bindkey '^_' peco-ssh
 
 
 ###########################################################################

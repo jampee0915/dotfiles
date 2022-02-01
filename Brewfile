@@ -22,13 +22,14 @@ brew "zplug"
 brew "exa"
 brew "fzf"
 brew "bat"
+brew "glow"
 
 brew "git"
 brew "awscli"
 brew "anyenv"
 brew "go"
-# brew "kotlin"
-# brew "gradle"
+brew "kotlin"
+brew "gradle"
 
 
 # ========================

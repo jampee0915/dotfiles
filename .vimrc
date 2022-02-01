@@ -167,6 +167,7 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'dense-analysis/ale'
+Plug 'skanehira/preview-markdown.vim'
 call plug#end()
 
 "-----------------------------------------------------------------
@@ -251,4 +252,7 @@ let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+let g:preview_markdown_parser="glow"
+let g:preview_markdown_vertical = 1
 
