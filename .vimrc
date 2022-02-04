@@ -120,6 +120,7 @@ else
 endif
 
 " マウス有効化
+set mouse=a
 if !has('nvim') && has('mouse')
     set mouse=a
     if has('mouse_sgr')
