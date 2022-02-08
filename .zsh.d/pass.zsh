@@ -17,3 +17,7 @@ export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --lin
 # enhancd
 export ENHANCD_DISABLE_HOME=1
 export ENHANCD_DISABLE_DOT=1
+
+# Go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH

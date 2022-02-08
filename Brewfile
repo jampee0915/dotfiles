@@ -35,15 +35,16 @@ brew "gradle"
 # ========================
 #                     cask
 # ========================
-# cask "google-chrome"
+cask "google-chrome"
 cask "google-japanese-ime"
 cask "alfred"
 cask "bettertouchtool"
 cask "hyperswitch"
 cask "authy"
-# cask "kindle"
+cask "kindle"
 cask "karabiner-elements"
-# cask "1password"
+cask "1password"
+cask "notion"
 
 # -----------------
 #               dev
@@ -51,7 +52,7 @@ cask "karabiner-elements"
 cask "visual-studio-code"
 cask "iterm2"
 cask "docker"
-# cask "corretto"
+cask "corretto"
 cask "intellij-idea"
 
 # -----------------
@@ -59,3 +60,4 @@ cask "intellij-idea"
 # -----------------
 mas "BetterSnapTool", id: 417375580
 mas "Slack", id: 803453959
+mas "Paste", id: 967805235
