@@ -6,9 +6,6 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-# anyenv
-eval "$(anyenv init -)"
-
 # fzf option
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'head -100 {}'"
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
