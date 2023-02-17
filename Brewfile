@@ -10,8 +10,6 @@ tap "homebrew/core"
 # ========================
 #                     brew
 # ========================
-brew "mas"
-
 brew "neovim", args: ["HEAD"]
 brew "ghq"
 brew "jq"
@@ -26,7 +24,7 @@ brew "glow"
 
 brew "git"
 brew "awscli"
-brew "anyenv"
+brew "asdf"
 brew "go"
 brew "kotlin"
 brew "gradle"
@@ -37,13 +35,10 @@ brew "gradle"
 # ========================
 cask "google-chrome"
 cask "google-japanese-ime"
-cask "alfred"
 cask "bettertouchtool"
 cask "hyperswitch"
 cask "authy"
-cask "kindle"
 cask "karabiner-elements"
-cask "1password"
 cask "notion"
 
 # -----------------
@@ -55,9 +50,3 @@ cask "docker"
 cask "corretto"
 cask "intellij-idea"
 
-# -----------------
-#               mas
-# -----------------
-mas "BetterSnapTool", id: 417375580
-mas "Slack", id: 803453959
-mas "Paste", id: 967805235
