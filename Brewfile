@@ -35,7 +35,6 @@ brew "gradle"
 # ========================
 cask "google-chrome"
 cask "google-japanese-ime"
-cask "bettertouchtool"
 cask "hyperswitch"
 cask "authy"
 cask "karabiner-elements"
