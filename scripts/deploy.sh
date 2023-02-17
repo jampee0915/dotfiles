@@ -32,20 +32,6 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# anyenv
-if has "anyenv" -a ! has "nodenv"; then
-    anyenv init
-    anyenv install --init
-    mkdir -p $(anyenv root)/plugins
-    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-    anyenv install nodenv
-    anyenv install pyenv
-    anyenv install tfenv
-
-    nodenv install 17.3.1
-    nodenv global 17.3.1
-fi
-
 # change login shell
 if [ "$(uname -m)" = "arm64" ]; then
     sudo sh -c "$(/opt/homebrew/bin/zsh) >> /etc/shells"
